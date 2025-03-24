@@ -6,6 +6,7 @@ dotenv.config();                 // load the .env file
 
 import userRouter from "./routes/user"; // import the userRouter from the user.ts file 
 import { contentRouter } from "./routes/content";
+import { brainRouter } from "./routes/brain";
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000; // get the PORT from .env file or use 3000 as default
 
@@ -38,6 +39,7 @@ app.use('/api/v1/user', userRouter);   // use the userRouter for user routes
 
 app.use('/api/v1/content', contentRouter); 
 
+app.use('/api/v1/brain', brainRouter);
 
 app.post('/api/v1/brain/share', (req, res) => {
 

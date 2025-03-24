@@ -25,7 +25,7 @@ const ContentSchema = new Schema({
     description: {
         type: String, 
         required: true,
-         default: ''
+        default: ''
     },
     link: {
         type: String, 
@@ -47,7 +47,7 @@ const ContentSchema = new Schema({
     }],
     isPublic: {
         type: Boolean,
-        default: false
+        default: true
     },
     createdAt: {
         type: Date,
@@ -81,7 +81,11 @@ const linkSchema = new Schema({
         unique: true,
         required: true
     }, 
-    userId: Types.ObjectId
+    userId: {
+        type: Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 })
 
 export const LinkModel = model("Link", linkSchema);

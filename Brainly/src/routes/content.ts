@@ -22,7 +22,7 @@ contentRouter.post('/', userAuth, async(req: Request, res: Response) => {
             title: title,
             description: description,
             link: link,
-            type: type,
+            contentType: type,
             tags: [],
             userId: userId
         });
@@ -62,6 +62,7 @@ contentRouter.get('/', userAuth, async(req: Request, res: Response) => {
         }
     }
 })
+// ws7pcse3u8d317k
 
 // @ts-ignore
 contentRouter.delete('/', userAuth, async (req: Request, res: Response) => {
