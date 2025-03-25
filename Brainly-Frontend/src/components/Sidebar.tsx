@@ -1,0 +1,27 @@
+// Date: 09/08/2021
+
+import { SidebarItems } from "./SidebarItems"
+import { Brain, Video, FileText, LinkIcon, Hash, Twitter } from "lucide-react"
+
+function Sidebar() {
+  return (
+    <>
+        <div className="w-52 border-r border-gray-200 p-4 flex flex-col">
+        <div className="flex items-center gap-2 mb-8">
+          <Brain className="h-6 w-6 text-indigo-600" />
+          <h1 className="font-semibold text-gray-800">Second Brain</h1>
+        </div>
+
+        <nav className="space-y-4">
+          <SidebarItems icon={<Twitter className="h-5 w-5 text-gray-600" />} label="Tweets" />
+          <SidebarItems icon={<Video className="h-5 w-5 text-gray-600" />} label="Videos" />
+          <SidebarItems icon={<FileText className="h-5 w-5 text-gray-600" />} label="Documents" />
+          <SidebarItems icon={<LinkIcon className="h-5 w-5 text-gray-600" />} label="Links" />
+          <SidebarItems icon={<Hash className="h-5 w-5 text-gray-600" />} label="Tags" />
+        </nav>
+      </div>
+    </>
+  )
+}
+
+export default Sidebar
