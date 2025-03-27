@@ -16,6 +16,8 @@ interface CardProps {
   isPublic?: boolean;
 }
 
+const cardUtilityButtonClass = "h-6 w-6 cursor-pointer" 
+
 const iconType = {
   youtube: <YoutubeIcon />,
   twitter: <TwitterIcon />,
@@ -42,11 +44,11 @@ export function Card({
             </span>
           </div>
           <div className="flex gap-2">
-            <button className="text-gray-400 hover:text-gray-600">
-              <Share2 className="h-5 w-5" />
+            <button className="text-gray-400 hover:text-gray-800">
+              <Share2 className={cardUtilityButtonClass} />
             </button>
             <button className="text-gray-400 hover:text-gray-600">
-              <Trash2 className="h-5 w-5" />
+              <Trash2 className={cardUtilityButtonClass} />
             </button>
           </div>
         </div>
@@ -71,9 +73,11 @@ export function Card({
           )}
 
           {contentType === "twitter" && embeddedLink && (
-            <blockquote className="twitter-tweet w-full" data-theme="dark">
-              <a href={embeddedLink.replace("x.com", "twitter.com")}></a>
-            </blockquote>
+            <div className="w-full max-w-2xl mx-auto">
+                <blockquote className="twitter-tweet w-full" data-theme="dark">
+                <a href={embeddedLink.replace("x.com", "twitter.com")}></a>
+                </blockquote>
+            </div>
           )}
         </div>
 
@@ -101,3 +105,4 @@ export function Card({
     </div>
   );
 }
+
