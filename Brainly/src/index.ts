@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";        // install dotenv package to use .env file for environment variables 
 dotenv.config();                 // load the .env file
+import cors from "cors";
 
 import userRouter from "./routes/user"; // import the userRouter from the user.ts file 
 import { contentRouter } from "./routes/content";
@@ -12,6 +13,7 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000; // get th
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const serverStart = async() :Promise<void> => {
     const mongoURI = process.env.MONGO_URI; 
