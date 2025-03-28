@@ -1,27 +1,5 @@
-// interface modalParams {
-//     open: boolean;
-//     onClose: () => void;
-//     closeIcon: React.ReactElement
-// }
-
 import { Input } from "./InputBox";
 import { Button } from './Button';
-
-// export function AddContentModal({ open, onClose, closeIcon }: modalParams) {
-//   return (
-//     <>
-//       {open && (
-//         <div className="h-full w-full bg-blue-400 fixed left-0 top-0 opacity-50 flex items-center justify-center">
-//           <div className="z-10 bg-white flex flex-col opacity-100 justify-center rounded-md p-10">
-//             <div onClick={onClose}>
-//               {closeIcon}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
 
 interface ModalParams {
     open: boolean;
@@ -49,8 +27,8 @@ export function AddContentModal({ open, onClose, closeIcon }: ModalParams) {
                         
                         <div className="p-6 w-full flex-col">
                             <h2 className="text-xl font-semibold mb-4">Add Content</h2>
-                            <Input placeholder= {"Title"} />
-                            <Input placeholder= {"Description"} />
+                            <Input placeholder= {"Title"} type="text" />
+                            <Input placeholder= {"Description"} type="text" />
                             <div className="flex justify-center mt-3">
                                 {/* after clicking submit the data will be fed into the backend and rendered on the frontend simultaneously as a note */}
                                 <Button variant="primary" text="Submit" onClick={onClose} />

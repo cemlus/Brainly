@@ -39,7 +39,7 @@ export function Card({
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center gap-2">
             {iconType[contentType]}
-            <span className="text-lg text-blue-950 font-medium line-clamp-1">
+            <span className="text-lg text-gray-500 font-mono line-clamp-1">
               {cardInfo}
             </span>
           </div>
@@ -54,7 +54,7 @@ export function Card({
         </div>
 
         {title && (
-          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
+          <h3 className="text-xl font-bold mb-2 line-clamp-2">{title}</h3>
         )}
 
         <div className="flex justify-center items-center w-full overflow-hidden my-4">
