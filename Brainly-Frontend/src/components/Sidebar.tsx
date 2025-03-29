@@ -1,11 +1,20 @@
 import { Button } from "./Button";
 import { SidebarItems } from "./SidebarItems";
 import { Brain, Video, FileText, LinkIcon, Hash, Twitter } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+
 
 function Sidebar() {
+  const navigate =  useNavigate();
+
+  const handleSignout = () => {
+    localStorage.removeItem("token")
+    console.log(`user signed out.`)
+    navigate('/signin')
+  }
   return (
     <>
-      <div className="w-52 border-r border-gray-200 p-4 flex flex-col justify-between">
+      <div className="w-52 border-r border-gray-200 p-4 flex flex-col justify-between mb-2">
         <div>
           <div className="flex items-center gap-2 mb-8">
             <Brain className="h-6 w-6 text-indigo-600" />
@@ -36,7 +45,7 @@ function Sidebar() {
           </nav>
         </div>
         {/* Implement signout funcitonality by removing the JWT token from the local storage and the Authorization header */}
-        <Button variant="primary" text="Signout"/>
+        <Button variant="primary" text="Signout" onClick={handleSignout}/>
       </div>
     </>
   );

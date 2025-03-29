@@ -27,8 +27,12 @@ export function AddContentModal({ open, onClose, closeIcon }: ModalParams) {
                         
                         <div className="p-6 w-full flex-col">
                             <h2 className="text-xl font-semibold mb-4">Add Content</h2>
-                            <Input placeholder= {"Title"} type="text" />
-                            <Input placeholder= {"Description"} type="text" />
+                            <div className="space-y-4">
+                                <Input placeholder= {"Card Information"} type="text" />
+                                <Input placeholder= {"Title"} type="text" />
+                                <Input placeholder= {"Description"} type="text" />
+                                <Input placeholder= {"Link"} type="text" />
+                            </div>
                             <div className="flex justify-center mt-3">
                                 {/* after clicking submit the data will be fed into the backend and rendered on the frontend simultaneously as a note */}
                                 <Button variant="primary" text="Submit" onClick={onClose} />
