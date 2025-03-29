@@ -1,18 +1,17 @@
 import { ContentModel } from "../db/db";
 import express, {Request, Response} from "express";
 import { userAuth } from "../utils/middlware";
-import ts from "typescript";
 
 export const contentRouter = express.Router();
 
 
 // @ts-ignore
 contentRouter.post('/', userAuth, async(req: Request, res: Response) => {
-    const {title, description} = req.body as {title: string , description: string};
-    const {link, type} = req.body as {link: string, type: string};
+    const {title, description, cardInfo} = req.body as {title: string , description: string , cardInfo: string};
+    const {embeddedLink, contentType, tags} = req.body as {embeddedLink: string, contentType: string, tags: string[]};
     const userId = req.userId;
 
-    if(!title || !description || !link || !type){
+    if(!title || !description || !embeddedLink || !contentType){
         return res.status(400).json({
             message: 'Please provide all the fields'
         });
@@ -21,9 +20,10 @@ contentRouter.post('/', userAuth, async(req: Request, res: Response) => {
         await ContentModel.create({
             title: title,
             description: description,
-            link: link,
-            contentType: type,
-            tags: [],
+            embeddedLink: embeddedLink,
+            contentType: contentType,
+            tags: tags,
+            cardInfo: cardInfo,
             userId: userId
         });
         return res.json({
@@ -49,7 +49,8 @@ contentRouter.get('/', userAuth, async(req: Request, res: Response) => {
         try {
             const content = await ContentModel.find({
                 userId: userId
-            }).populate('userId', 'username');
+            })
+
             res.status(200).json({
                 message: 'Content fetched successfully',
                 content: content

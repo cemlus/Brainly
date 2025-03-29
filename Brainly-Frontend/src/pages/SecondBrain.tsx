@@ -1,7 +1,3 @@
-"use client";
-
-// import type React from "react"
-
 import Sidebar from "../components/Sidebar";
 import { Button } from "../components/Button";
 import { ShareIcon } from "../assets/ShareIcon";
@@ -10,6 +6,7 @@ import { Card } from "../components/Card";
 import { AddContentModal } from "../components/AddContentModal";
 import { useState } from "react";
 import { CrossIcon } from "../assets/CrossIcon";
+import { Content, useContent } from "../hooks/UseContent";
 
 export default function SecondBrain() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,15 +16,33 @@ export default function SecondBrain() {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  // fetching content from backend using the custom hook created
+  // @ts-ignore
+  const { content, loading, error } = useContent();
+
+  // take care of loading and error component first
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        Loading...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex justify-center items-center h-screen text-red-600">
+        {error}
+      </div>
+    );
+
   return (
     <>
-      <AddContentModal 
-        open={modalOpen} 
-        onClose={closeModal} 
+      <AddContentModal
+        open={modalOpen}
+        onClose={closeModal}
         closeIcon={<CrossIcon onClose={closeModal} />}
       />
-      
-      
+
       <div className="flex h-screen bg-white">
         {/* Sidebar */}
         <Sidebar />
@@ -53,20 +68,18 @@ export default function SecondBrain() {
 
           {/* Notes Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 w-full">
-            <Card
-              cardInfo="Interesting"
-              title="How is notion scalable?"
-              contentType="youtube"
-              tags={["cool", "software"]}
-              embeddedLink="https://www.youtube.com/watch?v=NwZ26lxl8wU"
-              description="This is a learning video to watch as it explaina how notion despite bieng a completely online platform handles so many concurrent users and stores their data"
-            />
-            <Card
-              cardInfo="Random"
-              contentType="twitter"
-              embeddedLink="https://x.com/aaditsh/status/1904388143622877618"
-              tags={["tweet"]}
-            />
+            {Object.values(content).map((item: Content) => (
+              <Card
+                key={item._id.toString()}
+                _id={item._id.toString()}
+                cardInfo={item.cardInfo}
+                title={item.title}
+                description={item.description}
+                embeddedLink={item.embeddedLink}
+                contentType={item.contentType}
+                tags={item.tags}
+              />
+            ))}
           </div>
         </div>
       </div>

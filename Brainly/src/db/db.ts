@@ -1,6 +1,5 @@
 // schemas and models
 import { Schema, Types, model } from "mongoose";
-import mongoose from 'mongoose';
 
 const UserSchema = new Schema({
     username: { 
@@ -16,17 +15,20 @@ const UserSchema = new Schema({
 
 export const UserModel = model("User", UserSchema);
 
-const contentTypes = ['image', 'video', 'text', 'article'];
+const contentTypes = ["youtube", "twitter", "document", "link"];
+
 const ContentSchema = new Schema({
+    cardInfo: {
+        type: String
+    },
     title: {
         type: String, 
-        required: true
     },
     description: {
         type: String, 
         default: ''
     },
-    link: {
+    embeddedLink: {
         type: String, 
         required: true
     },
@@ -36,14 +38,15 @@ const ContentSchema = new Schema({
         required: true
     },
     tags: [{
-        type: Types.ObjectId,
+        type: String,
+        id: Types.ObjectId,
         ref: 'Tag'
     }],
-    userId: [{
+    userId: {
         type: Types.ObjectId, 
         ref: 'User', 
         required: true
-    }],
+    },
     isPublic: {
         type: Boolean,
         default: true
