@@ -4,6 +4,7 @@ import { Button } from "../components/Button";
 import { Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BACKEND_URL } from "../utils/config";
 
 export function Signin() {
     const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ export function Signin() {
 
     async function handleSignin() {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+            const response = await axios.post(BACKEND_URL+"user/signin", {
                 username,
                 password
             })
@@ -24,10 +25,11 @@ export function Signin() {
                 axios.defaults.headers.common["Authorization"] = response.data.token
                 navigate('/dashboard');
             } else {
-                console.error("Signin Failed")
+                alert("Signin Failed")
             }
         } catch (error) {
-            console.error("Error during signup:", error);
+            alert("Signin failed.")
+            console.error("Error during signin:", error);
         }
     }
 

@@ -3,6 +3,7 @@ import { Input } from "../components/InputBox";
 import { Button } from "../components/Button";
 import { Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/config";
 
 export function Signup() {
     const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ export function Signup() {
 
     async function handleSignup() {
         try {
-            const response = await fetch("http://localhost:3000/api/v1/user/signup", {
+            const response = await fetch(BACKEND_URL + "user/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -25,11 +26,11 @@ export function Signup() {
             if (response.ok) {
                 navigate("/signin");
             } else {
-                // Handle error (show message to user)
-                console.error("Signup failed");
+                alert("Signup failed, User may already exist.");
             }
         } catch (error) {
             console.error("Error during signup:", error);
+            alert("Error during Signup.");
         }
     }
 
