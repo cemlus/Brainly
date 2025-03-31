@@ -10,9 +10,6 @@ interface ButtonProps {
   className?: string;
 }
 
-
-// ADD font weight and make the buttons look better
-
 const defaultStyles = "px-4 py-2 rounded-md flex items-center gap-2 justify-center cursor-pointer"; // default styles for the button
 
 //  what if there are more than 2 variants? cant use ternary operator then, hence we create an object to store the classes for each variant

@@ -118,6 +118,12 @@ export function Card({
           )}
         </div>
 
+        {(contentType === "document" || contentType === "link" ) && embeddedLink && (
+          <div className="mb-4 min-w-content">
+            <p className="break-words whitespace-normal text-indigo-600">{embeddedLink}</p>
+          </div>
+        )}
+
         {description && (
           <div className="mb-4 min-w-content">
             <p className="break-words whitespace-normal">{description}</p>
