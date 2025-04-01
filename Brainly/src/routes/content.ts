@@ -11,7 +11,7 @@ contentRouter.post('/', userAuth, async(req: Request, res: Response) => {
     const {embeddedLink, contentType, tags} = req.body as {embeddedLink: string, contentType: string, tags: string[]};
     const userId = req.userId;
 
-    if(!title || !description || !embeddedLink || !contentType){
+    if(!embeddedLink || !contentType){
         return res.status(400).json({
             message: 'Please provide all the fields'
         });
@@ -63,7 +63,6 @@ contentRouter.get('/', userAuth, async(req: Request, res: Response) => {
         }
     }
 })
-// ws7pcse3u8d317k
 
 // @ts-ignore
 contentRouter.delete('/', userAuth, async (req: Request, res: Response) => {
