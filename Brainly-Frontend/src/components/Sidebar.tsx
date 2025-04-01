@@ -5,13 +5,17 @@ import { SidebarItems } from "./SidebarItems";
 import { Brain, Video, FileText, LinkIcon, Hash, LogOut, ChevronRight, ChevronLeft, HomeIcon } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useFilter } from '../hooks/UseFilterContext';
 
 function Sidebar() {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState<string>('');
+  // the default active items is set to home so that all the content is shown by default
+  const [activeItem, setActiveItem] = useState<string>('Home');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleCollapse = () => setIsCollapsed(prev => !prev);
+  // this is used to set the active filter type in the filter context provider
+  const { setActiveFilter } = useFilter();
 
   const handleSignout =() => {
     localStorage.removeItem("token");
@@ -106,17 +110,20 @@ function Sidebar() {
               // if the current activeItem is the same as the one selected then isActive becomes true and the corresponding color and tailwind classes reappear simply based on this comparison
               isActive={activeItem === item.label}
               // when you click the button the currentActiveItem becomes that only.
-              onClick={() => setActiveItem(item.label)}
+              onClick={() => { 
+                setActiveItem(item.label)
+                setActiveFilter(item.filterType)
+              }}
               className={`
                 ${isCollapsed ? 'px-2 justify-center' : 'px-4'}
                 hover:bg-gray-100
               `}
               isCollapsed={isCollapsed}
+              filterType={item.filterType}
             />
           ))}
         </nav>
 
-        {/* Footer */}
         <div className="p-4 border-t border-gray-200 mt-auto">
           <Button
             variant="primary"

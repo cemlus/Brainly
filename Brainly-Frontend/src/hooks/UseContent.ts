@@ -18,7 +18,7 @@ export interface Content {
     userId: string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
-    isPublic?: boolean
+    isPublic?: boolean;
 }
 
 export function useContent() {
@@ -65,36 +65,3 @@ export function useContent() {
     return { content, loading, error };
 }
 
-
-// export function useContent() {
-//     const [content, setContent] = useState<Content[]>([]);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState<string | null>(null);
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         const fetchContent = async () => {
-//             try {
-//                 const response = await axios.get("http://localhost:3000/api/v1/content/", {
-//                     headers: {
-//                         Authorization: `${localStorage.getItem("token")}`
-//                     }
-//                 });
-                
-//                 if(response.data.content){
-//                     setContent(response.data.content);
-//                     console.log('Received content:', response.data.content);
-//                 } else {
-//                     setError("No content available");
-//                 }
-//             } catch (error) {
-//                 // Error handling
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-//         fetchContent();
-//     }, [navigate]);
-
-//     return { content, loading, error };
-// }

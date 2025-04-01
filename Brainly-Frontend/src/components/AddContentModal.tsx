@@ -46,6 +46,9 @@ export function AddContentModal({ open, onClose, closeIcon }: ModalParams) {
                 Authorization: localStorage.getItem("token")
             }
         });
+
+        console.log(response.data);
+        
     
         if(response.status === 200){
             window.location.reload();

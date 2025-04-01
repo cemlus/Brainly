@@ -5,7 +5,7 @@ export interface SidebarItemsProps {
   onClick: () => void;
   className?: string;
   isCollapsed?: boolean;
-  filterType: string
+  filterType?: string
 }
 
 export function SidebarItems({ 
@@ -18,9 +18,7 @@ export function SidebarItems({
 }: SidebarItemsProps) {
   return (
     <div
-      onClick={() => {
-        onClick();
-      }}
+      onClick={() => onClick()}
       className={`
         flex items-center gap-3
         transition-all duration-200 ease-in-out
